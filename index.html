@@ -10,22 +10,24 @@
 
     <style>
         :root {
-            --bg-color: #f0f2f5;
-            --text-color: #2d3748;
-            --card-bg: #ffffff;
+            /* Default Night Mode Variables 🌙 */
+            --bg-color: #0f172a;
+            --text-color: #f1f5f9;
+            --card-bg: #1e293b;
+            --input-border: #334155;
             --main-accent: #6c5ce7;
             --purple-clr: #6c5ce7;
             --green-clr: #2ed573;
             --orange-clr: #ffa502;
             --pink-clr: #ff6b81;
-            --input-border: #e2e8f0;
         }
 
-        [data-theme="dark"] {
-            --bg-color: #0f172a;
-            --text-color: #f1f5f9;
-            --card-bg: #1e293b;
-            --input-border: #334155;
+        [data-theme="light"] {
+            /* Light Mode Variables triggered via Button ☀️ */
+            --bg-color: #f0f2f5;
+            --text-color: #2d3748;
+            --card-bg: #ffffff;
+            --input-border: #e2e8f0;
         }
 
         * {
@@ -36,7 +38,8 @@
         }
 
         body {
-            background-color: #f7f9fa;
+            /* Premium Linear Gradient Background */
+            background: linear-gradient(135deg, var(--bg-color) 0%, #050b14 100%);
             color: var(--text-color);
             min-height: 100vh;
             display: flex;
@@ -60,7 +63,6 @@
             overflow: hidden;
         }
 
-        /* Particle Circle Elements */
         .particle {
             position: absolute;
             background: rgba(255, 255, 255, 0.03);
@@ -211,7 +213,7 @@
             border-radius: 14px;
             font-size: 1.05rem;
             font-weight: 600;
-            background: var(--bg-color);
+            background: linear-gradient(135deg, var(--card-bg) 0%, var(--bg-color) 100%);
             color: var(--text-color);
             outline: none;
         }
@@ -222,7 +224,7 @@
             position: absolute;
             right: 10px; bottom: 12px;
             width: 20px; height: 20px;
-            background: rgba(0,0,0,0.1);
+            background: rgba(255,255,255,0.1);
             color: var(--text-color);
             border-radius: 50%;
             border: none;
@@ -233,7 +235,6 @@
             align-items: center;
             justify-content: center;
         }
-        [data-theme="dark"] .clear-input-btn { background: rgba(255,255,255,0.1); }
 
         .calc-btn {
             width: 100%; padding: 14px; border: none; border-radius: 14px; color: white;
@@ -259,9 +260,8 @@
 
         /* 4. DYNAMIC PROGRESS BAR */
         .progress-container {
-            width: 100%; height: 6px; background: rgba(0,0,0,0.05); border-radius: 4px; overflow: hidden; display: none;
+            width: 100%; height: 6px; background: rgba(255,255,255,0.05); border-radius: 4px; overflow: hidden; display: none;
         }
-        [data-theme="dark"] .progress-container { background: rgba(255,255,255,0.05); }
         .progress-bar {
             width: 0%; height: 100%; border-radius: 4px; transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
         }
@@ -327,7 +327,7 @@
                 </div>
                 <h1>Percentify</h1>
             </div>
-            <button class="theme-btn" id="themeToggle">🌙 Dark Mode</button>
+            <button class="theme-btn" id="themeToggle">☀️ Light Mode</button>
         </header>
 
         <div class="card purple">
@@ -449,7 +449,6 @@
     <script>
         let audioCtx = null;
 
-        // Generate dynamic background splash particles
         function createSplashParticles() {
             const container = document.getElementById('particle-container');
             for (let i = 0; i < 15; i++) {
@@ -474,7 +473,6 @@
             splash.style.visibility = 'hidden';
             mainApp.style.display = 'block';
             
-            // Staggered trigger for cards entry animation
             setTimeout(() => {
                 splash.style.display = 'none';
                 document.querySelectorAll('.card').forEach((card, idx) => {
@@ -483,7 +481,6 @@
             }, 500);
         }
 
-        // 100% Offline Fast Click Engine
         function playInputSound() {
             try {
                 if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -504,7 +501,6 @@
             } catch (e) { console.log(e); }
         }
 
-        // Handle auto-clear button visibility on typing
         function handleInputState(input) {
             playInputSound();
             const btn = input.nextElementSibling;
@@ -518,7 +514,6 @@
             playInputSound();
         }
 
-        // WhatsApp Custom Intent Link Engine
         function setWhatsAppShare(btnId, message) {
             const btn = document.getElementById(btnId);
             const url = `https://api.whatsapp.com/send?text=${encodeURIComponent(message)}`;
@@ -550,7 +545,6 @@
             
             triggerDisplay('c2-box', 'c2-res', `Score: ${r}%`);
             
-            // Progress bar trigger loading smoothly
             const pBox = document.getElementById('c2-progress-box');
             const pBar = document.getElementById('c2-progress-bar');
             pBox.style.display = 'block';
@@ -582,7 +576,6 @@
             logHistory(`${oldV} ➔ ${newV} = -${r}%`, 'pink');
         }
 
-        // History Management
         function logHistory(msg, themeColor) {
             let logs = JSON.parse(localStorage.getItem('simpleLogsModern')) || [];
             logs.unshift({ msg: msg, color: themeColor });
@@ -621,23 +614,24 @@
             alert("Value copied to clipboard!");
         }
 
-        // Setup Theme Swap
+        // Setup Theme Swap Logic (Fixed for Default Night Mode)
         const themeToggle = document.getElementById('themeToggle');
         themeToggle.addEventListener('click', () => {
-            const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-            document.documentElement.setAttribute('data-theme', isDark ? 'light' : 'dark');
-            themeToggle.innerText = isDark ? "🌙 Dark Mode" : "☀️ Light Mode";
+            const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+            document.documentElement.setAttribute('data-theme', isLight ? 'dark' : 'light');
+            themeToggle.innerText = isLight ? "☀️ Light Mode" : "🌙 Dark Mode";
             playInputSound();
         });
 
         window.onload = displayLogs;
 
-if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-        navigator.serviceWorker.register('data:text/javascript;base64,c2VsZi5hZGRFdmVudExpc3RlbmVyKCdmZXRjaCcsIGUgPT4gZS5yZXNwb25kV2l0aChmZXRjaChlLnJlcXVlc3QpKSk7')
-        .then(() => console.log("PWA Activated!"));
-    });
-}
+        // PWA Core Activation System
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('data:text/javascript;base64,c2VsZi5hZGRFdmVudExpc3RlbmVyKCdmZXRjaCcsIGUgPT4gZS5yZXNwb25kV2l0aChmZXRjaChlLnJlcXVlc3QpKSk7')
+                .then(() => console.log("PWA Activated!"));
+            });
+        }
     </script>
 </body>
 </html>

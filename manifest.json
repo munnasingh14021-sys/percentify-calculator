@@ -1,0 +1,27 @@
+{
+  "background_color": "#0f172a",
+  "dir": "ltr",
+  "display": "standalone",
+  "name": "Percentify-Calculator",
+  "orientation": "any",
+  "scope": "/",
+  "short_name": "Percentify",
+  "start_url": "/",
+  "theme_color": "#1e293b",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,&lt;svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'&gt;&lt;defs&gt;&lt;linearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'&gt;&lt;stop offset='0%25' stop-color='%236c5ce7'/&gt;&lt;stop offset='100%25' stop-color='%23ff4757'/&gt;&lt;/linearGradient&gt;&lt;/defs&gt;&lt;path d='M50 5 L15 25 V65 L50 95 L85 65 V25 Z' fill='url(%23g)' stroke='%23f1f5f9' stroke-width='3'/&gt;&lt;text x='50' y='65' font-family='Segoe UI, sans-serif' font-weight='800' font-size='45' fill='white' text-anchor='middle'&gt;P&lt;/text&gt;&lt;/svg&gt;",
+      "type": "image/svg+xml",
+      "isSquare": false,
+      "isPng": false,
+      "isWebp": false,
+      "isJpg": false,
+      "width": 0,
+      "is512x512": false,
+      "is256x256": false,
+      "is192x192": false
+    }
+  ],
+  "id": "percentify-calculator",
+  "description": "Simple percentage calculator for students and daily calculations."
+}
